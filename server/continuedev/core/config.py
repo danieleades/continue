@@ -674,7 +674,8 @@ class ContinueConfig(BaseModel):
         return ModelDescription(
             title=llm.title or "LLM",
             provider=MODEL_CLASS_TO_MODEL_PROVIDER.get(
-                llm.__class__.__name__, "custom"  # type: ignore
+                llm.__class__.__name__,
+                "custom",  # type: ignore
             ),
             model=llm.model,
             api_key=llm.api_key,

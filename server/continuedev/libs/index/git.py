@@ -62,7 +62,13 @@ class GitProject:
         try:
             modified_deleted_files = (
                 subprocess.check_output(
-                    ["git", "diff", "--name-only", since_commit, self.current_commit]
+                    [
+                        "git",
+                        "diff",
+                        "--name-only",
+                        since_commit,
+                        self.current_commit,
+                    ]
                 )
                 .decode("utf-8")
                 .strip()

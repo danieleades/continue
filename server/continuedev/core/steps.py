@@ -469,7 +469,15 @@ Please output the code to be inserted at the cursor in order to fulfill the user
         indices_of_last_matched_lines = []
 
         async def handle_generated_line(line: str):
-            nonlocal current_block_start, current_line_in_file, original_lines, original_lines_below_previous_blocks, current_block_lines, indices_of_last_matched_lines, LINES_TO_MATCH_BEFORE_ENDING_BLOCK, offset_from_blocks
+            nonlocal \
+                current_block_start, \
+                current_line_in_file, \
+                original_lines, \
+                original_lines_below_previous_blocks, \
+                current_block_lines, \
+                indices_of_last_matched_lines, \
+                LINES_TO_MATCH_BEFORE_ENDING_BLOCK, \
+                offset_from_blocks
 
             if len(current_block_lines) == 0:
                 # Set this as the start of the next block
@@ -506,7 +514,10 @@ Please output the code to be inserted at the cursor in order to fulfill the user
                     ]
                 ):
                     matches_found.append(
-                        (index_of_last_matched_line + 1, num_lines_matched + 1)
+                        (
+                            index_of_last_matched_line + 1,
+                            num_lines_matched + 1,
+                        )
                     )
                     if (
                         first_valid_match is None

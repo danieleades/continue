@@ -2,7 +2,6 @@
 This file contains mechanisms for logging development data to files, SQL databases, and other formats.
 """
 
-
 import json
 from datetime import datetime
 from typing import Any, Dict, Optional
