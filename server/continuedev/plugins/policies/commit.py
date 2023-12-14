@@ -40,12 +40,10 @@ class PlanStep(Step):
 
     async def run(self, sdk: ContinueSDK):
         plan = await sdk.models.default.complete(
-            self._prompt.format(
-                {
-                    "user_input": self.user_input,
-                    "relevant_files": "TODO",
-                }
-            )
+            self._prompt.format({
+                "user_input": self.user_input,
+                "relevant_files": "TODO",
+            })
         )
         return TextObservation(text=plan)
 

@@ -12,12 +12,10 @@ class MarkdownStyleEncoderDecoder:
         self.range_in_files = range_in_files
 
     def encode(self) -> str:
-        return "\n\n".join(
-            [
-                f"File ({rif.filepath})\n```\n{rif.contents}\n```"
-                for rif in self.range_in_files
-            ]
-        )
+        return "\n\n".join([
+            f"File ({rif.filepath})\n```\n{rif.contents}\n```"
+            for rif in self.range_in_files
+        ])
 
     def _suggestions_to_file_edits(self, suggestions: Dict[str, str]) -> List[FileEdit]:
         file_edits: List[FileEdit] = []

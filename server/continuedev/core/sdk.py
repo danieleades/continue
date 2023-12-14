@@ -47,8 +47,7 @@ class Autopilot(ABC):
 
     context: Context = Context()
 
-    async def run_step(self, step: Step):
-        ...
+    async def run_step(self, step: Step): ...
 
 
 class ContinueSDK(AbstractContinueSDK):
@@ -193,14 +192,12 @@ class ContinueSDK(AbstractContinueSDK):
         editing = filter(
             lambda x: x.editable and (x.editing or not only_editing), self.context_items
         )
-        return await asyncio.gather(
-            *[
-                HighlightedCodeContextProvider.get_range_in_file_with_contents(
-                    self.ide, item
-                )
-                for item in editing
-            ]
-        )
+        return await asyncio.gather(*[
+            HighlightedCodeContextProvider.get_range_in_file_with_contents(
+                self.ide, item
+            )
+            for item in editing
+        ])
 
     async def add_context_item(self, item: ContextItem):
         index = len(self.__autopilot.session_state.history) - 1
@@ -219,9 +216,9 @@ class ContinueSDK(AbstractContinueSDK):
             "context_items", []
         )
         context_items.append(item.dict())
-        self.__autopilot.session_state.history[index].params[
-            "context_items"
-        ] = context_items
+        self.__autopilot.session_state.history[index].params["context_items"] = (
+            context_items
+        )
         await self.gui.add_context_item_at_index(item, index)
 
     def set_loading_message(self, message: str):
@@ -241,9 +238,9 @@ class ContinueSDK(AbstractContinueSDK):
             if step.step_type == "UserInputStep":
                 role = "user"
                 msgs.extend(
-                    await self.__autopilot.context_manager.get_chat_messages(
-                        [ContextItem(**itm) for itm in step.params["context_items"]]
-                    )
+                    await self.__autopilot.context_manager.get_chat_messages([
+                        ContextItem(**itm) for itm in step.params["context_items"]
+                    ])
                 )
 
             msgs.append(

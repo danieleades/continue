@@ -70,14 +70,10 @@ class MeilisearchCodebaseIndex(CodebaseIndex):
         )
 
     async def add_chunks(self, chunks: List[Chunk], index: Index, offset: int):
-        await index.add_documents(
-            [
-                self.chunk_to_meilisearch_document(
-                    chunk, int(chunk.digest, 16), [self.tag]
-                )
-                for chunk in chunks
-            ]
-        )
+        await index.add_documents([
+            self.chunk_to_meilisearch_document(chunk, int(chunk.digest, 16), [self.tag])
+            for chunk in chunks
+        ])
 
     async def delete_chunks(self, document_ids: List[str], index: Index):
         documents = (

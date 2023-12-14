@@ -363,28 +363,22 @@ class ContextManager:
 
                 await search_client.create_index(SEARCH_INDEX_NAME)
                 globalSearchIndex = await search_client.get_index(SEARCH_INDEX_NAME)
-                await globalSearchIndex.update_ranking_rules(
-                    [
-                        "attribute",
-                        "words",
-                        "typo",
-                        "proximity",
-                        "sort",
-                        "exactness",
-                    ]
-                )
-                await globalSearchIndex.update_searchable_attributes(
-                    [
-                        "name",
-                        "description",
-                    ]
-                )
-                await globalSearchIndex.update_filterable_attributes(
-                    [
-                        "workspace_dir",
-                        "provider_name",
-                    ]
-                )
+                await globalSearchIndex.update_ranking_rules([
+                    "attribute",
+                    "words",
+                    "typo",
+                    "proximity",
+                    "sort",
+                    "exactness",
+                ])
+                await globalSearchIndex.update_searchable_attributes([
+                    "name",
+                    "description",
+                ])
+                await globalSearchIndex.update_filterable_attributes([
+                    "workspace_dir",
+                    "provider_name",
+                ])
 
                 async def load_context_provider(provider: ContextProvider):
                     context_items = await provider.provide_context_items(workspace_dir)

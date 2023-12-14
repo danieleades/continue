@@ -156,9 +156,9 @@ class ChromaCodebaseIndex(CodebaseIndex):
             documents.append(chunk.content)
             metadata = {**chunk.metadata}
             metadata["filepath"] = chunk.filepath
-            metadata[
-                "document_id"
-            ] = chunk.digest  # Need to be able to filter by document_id (hash)
+            metadata["document_id"] = (
+                chunk.digest
+            )  # Need to be able to filter by document_id (hash)
             metadata[self.tag] = 1  # This is how we filter by tag
             metadatas.append(metadata)
             ids.append(chunk.id)

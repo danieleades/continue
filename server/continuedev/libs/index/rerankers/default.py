@@ -136,13 +136,11 @@ async def default_reranker_parallel(
         filter(lambda x: counts_per_document[x] > 1, counts_per_document)
     )
 
-    not_disqualified = set(
-        [
-            chunk.id
-            for chunk in chunks
-            if chunk.id not in remove or chunk.digest in repeated_documents
-        ]
-    )
+    not_disqualified = set([
+        chunk.id
+        for chunk in chunks
+        if chunk.id not in remove or chunk.digest in repeated_documents
+    ])
 
     included = set([id for id in not_disqualified if chunk.id in include])
 

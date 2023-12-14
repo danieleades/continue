@@ -114,13 +114,11 @@ def is_default(llm, k, v):
 
 def display_llm_class(llm, new: bool = False, overrides: Dict[str, str] = {}):
     sep = ",\n\t\t\t"
-    args = sep.join(
-        [
-            f"{k}={display_val(v, k) if k not in overrides else overrides[k]}"
-            for k, v in llm.dict().items()
-            if k not in filtered_attrs and v is not None and not is_default(llm, k, v)
-        ]
-    )
+    args = sep.join([
+        f"{k}={display_val(v, k) if k not in overrides else overrides[k]}"
+        for k, v in llm.dict().items()
+        if k not in filtered_attrs and v is not None and not is_default(llm, k, v)
+    ])
     return f"{llm.__class__.__name__}(\n\t\t\t{args}\n\t\t)"
 
 

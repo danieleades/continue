@@ -18,8 +18,7 @@ from ...models.main import Range, Traceback
 
 
 class Policy(BaseModel):
-    def next(self, config, history) -> Optional[Step]:
-        ...
+    def next(self, config, history) -> Optional[Step]: ...
 
 
 class RunPolicyUntilDoneStep(Step):

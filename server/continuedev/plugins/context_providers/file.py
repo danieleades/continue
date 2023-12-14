@@ -43,12 +43,9 @@ class FileContextProvider(ContextProvider):
             await self.update_documents([item], self.ide.workspace_directory)
 
         async def on_files_created(filepaths: List[str]):
-            items = await asyncio.gather(
-                *[
-                    self.get_context_item_for_filepath(filepath)
-                    for filepath in filepaths
-                ]
-            )
+            items = await asyncio.gather(*[
+                self.get_context_item_for_filepath(filepath) for filepath in filepaths
+            ])
             items = [item for item in items if item is not None]
             await self.update_documents(items, self.ide.workspace_directory)
 
@@ -62,12 +59,10 @@ class FileContextProvider(ContextProvider):
                 return
 
             old_ids = [self.get_id_for_filepath(filepath) for filepath in old_filepaths]
-            new_docs = await asyncio.gather(
-                *[
-                    self.get_context_item_for_filepath(filepath)
-                    for filepath in new_filepaths
-                ]
-            )
+            new_docs = await asyncio.gather(*[
+                self.get_context_item_for_filepath(filepath)
+                for filepath in new_filepaths
+            ])
             new_docs = [doc for doc in new_docs if doc is not None]
 
             await self.delete_documents(old_ids)
@@ -149,12 +144,10 @@ class FileContextProvider(ContextProvider):
         delta = 100
         while i < len(absolute_filepaths):
             # Don't want to flood with too many requests
-            items += await asyncio.gather(
-                *[
-                    self.get_context_item_for_filepath(filepath)
-                    for filepath in absolute_filepaths[i : i + delta]
-                ]
-            )
+            items += await asyncio.gather(*[
+                self.get_context_item_for_filepath(filepath)
+                for filepath in absolute_filepaths[i : i + delta]
+            ])
 
             i += delta
             await asyncio.sleep(timeout)

@@ -89,14 +89,12 @@ def stream_files_to_update(
         )
 
     # Yield from files changed in the working tree
-    should_yield = set(
-        [
-            pygit2.GIT_STATUS_INDEX_NEW,
-            pygit2.GIT_STATUS_INDEX_MODIFIED,
-            pygit2.GIT_STATUS_WT_MODIFIED,
-            pygit2.GIT_STATUS_WT_NEW,
-        ]
-    )
+    should_yield = set([
+        pygit2.GIT_STATUS_INDEX_NEW,
+        pygit2.GIT_STATUS_INDEX_MODIFIED,
+        pygit2.GIT_STATUS_WT_MODIFIED,
+        pygit2.GIT_STATUS_WT_NEW,
+    ])
     for filepath, status in repo.status().items():
         if status in should_yield and not should_ignore(filepath):
             digest = repo.revparse_single("HEAD:" + filepath).hex

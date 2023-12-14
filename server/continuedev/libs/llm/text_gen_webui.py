@@ -76,14 +76,12 @@ class TextGenWebUI(LLM):
 
             ws_url = f"{self.streaming_url.replace('http://', 'ws://').replace('https://', 'wss://')}"
             history = list(map(lambda x: x.content, messages))
-            payload = json.dumps(
-                {
-                    "user_input": messages[-1].content,
-                    "history": {"internal": [history], "visible": [history]},
-                    "stream": True,
-                    **args,
-                }
-            )
+            payload = json.dumps({
+                "user_input": messages[-1].content,
+                "history": {"internal": [history], "visible": [history]},
+                "stream": True,
+                **args,
+            })
             async with websockets.connect(
                 f"{ws_url}/api/v1/chat-stream", ping_interval=None
             ) as websocket:

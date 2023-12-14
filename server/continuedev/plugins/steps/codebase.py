@@ -88,12 +88,10 @@ class AnswerQuestionChroma(Step):
         query = self.user_input
         keywords = None
         if faster_model is not None:
-            resps = await asyncio.gather(
-                *[
-                    code_hyde(self.user_input, "", faster_model),
-                    generate_keywords(self.user_input, faster_model),
-                ]
-            )
+            resps = await asyncio.gather(*[
+                code_hyde(self.user_input, "", faster_model),
+                generate_keywords(self.user_input, faster_model),
+            ])
             query = resps[0]
             keywords = resps[1]
 

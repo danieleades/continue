@@ -77,11 +77,9 @@ Hello! [/INST]""",
     ],
 )
 def test_template_messages(template, expected):
-    templated = template(
-        [
-            ChatMessage(role="system", content="Always be kind"),
-            ChatMessage(role="user", content="Hello!"),
-        ]
-    )
+    templated = template([
+        ChatMessage(role="system", content="Always be kind"),
+        ChatMessage(role="user", content="Hello!"),
+    ])
     print(templated)
     assert templated == expected

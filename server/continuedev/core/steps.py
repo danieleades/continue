@@ -513,12 +513,10 @@ Please output the code to be inserted at the cursor in order to fulfill the user
                         index_of_last_matched_line + 1
                     ]
                 ):
-                    matches_found.append(
-                        (
-                            index_of_last_matched_line + 1,
-                            num_lines_matched + 1,
-                        )
-                    )
+                    matches_found.append((
+                        index_of_last_matched_line + 1,
+                        num_lines_matched + 1,
+                    ))
                     if (
                         first_valid_match is None
                         and num_lines_matched + 1 >= LINES_TO_MATCH_BEFORE_ENDING_BLOCK
@@ -635,9 +633,9 @@ Please output the code to be inserted at the cursor in order to fulfill the user
             if template.__class__.__name__ == "PromptTemplate":
                 params.update(template.dict(exclude={"prompt"}))  # type: ignore
 
-            params.update(
-                {"max_tokens": min(max_tokens, model_to_use.context_length // 2, 4096)}
-            )
+            params.update({
+                "max_tokens": min(max_tokens, model_to_use.context_length // 2, 4096)
+            })
             generator = model_to_use.stream_complete(**params)
 
         else:
@@ -874,8 +872,7 @@ class ManualEditStep(ReversibleStep):
             diffs.append(diff)
         return cls(edit_diff=EditDiff.from_sequence(diffs))
 
-    async def run(self, sdk: AbstractContinueSDK):
-        ...
+    async def run(self, sdk: AbstractContinueSDK): ...
 
     async def reverse(self, sdk: AbstractContinueSDK):
         await sdk.ide.applyFileSystemEdit(self.edit_diff.backward)

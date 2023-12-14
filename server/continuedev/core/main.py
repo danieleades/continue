@@ -327,12 +327,10 @@ class SessionState(ContinueBaseModel):
 
 
 class ContinueSDK:
-    async def run_step(self, step: "Step"):
-        ...
+    async def run_step(self, step: "Step"): ...
 
 
-class Models:
-    ...
+class Models: ...
 
 
 class Policy(ContinueBaseModel):
